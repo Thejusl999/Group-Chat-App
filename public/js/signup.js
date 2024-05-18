@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const obj = { name, email, phone, password };
     try {
       await axios.post("http://localhost:3000/user/signup", obj);
-      alert("User signed up successfully!");
+      alert("Successfully signed up!");
       clearForm();
     } catch (err) {
-      alert("User already exists!");
+      alert("User already exists, Please Login!");
     }finally{
       // window.location.href = "../html/login.html";
     }
