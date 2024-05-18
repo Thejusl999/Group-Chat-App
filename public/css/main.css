@@ -1,0 +1,96 @@
+body{
+  background-color: #001220;
+  color: white;
+}
+img {
+  width: 25rem;
+  height: 10rem;
+}
+p{
+  width: 25rem;
+  font-size: 15px;
+}
+.auth {
+  margin: 2rem 0;
+  width: 95%;
+  max-width: 24rem;
+  border-radius: 10px;
+  padding: 2.5rem;
+  border:3px solid cyan;
+}
+.auth h1{
+  margin-top: 10px;
+  margin-bottom:1.5rem;
+  text-align:center;
+}
+.control { 
+  margin-bottom: 1.25rem;
+}
+.control label {
+  display: block;
+  font-weight: bold;
+}
+.control input {
+  font: inherit;
+  border-radius: 4px;
+  width: 100%;
+  padding: 0.25rem;
+  color: black;
+}
+.actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.actions button {
+  cursor: pointer;
+  font: inherit;
+  font-weight: bold;
+  color: black;
+  background-color: rgb(32, 178, 170);
+  border: 1px solid rgb(32, 178, 170);
+  border-radius: 20px;
+  padding: 0.5rem 2.5rem;
+  width: 75%;
+  margin-bottom: -0.5rem;
+}
+.actions button:hover{
+  background-color: rgba(32, 178, 170,0.8);
+  border: 1px solid rgba(32, 178, 170,0.8);
+}
+.loginActions button{
+  cursor: pointer;
+  font: inherit;
+  color: black;
+  background-color: rgb(0, 255, 255);
+  border: 1px solid rgb(0, 255, 255);
+  border-radius: 4px;
+  padding: 0.5rem;
+  width: 100%;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.loginActions button:hover{
+  background-color: rgba(0, 255, 255,0.65);
+  border: 1px solid rgba(0, 255, 255,0.65);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', 'Lato', sans-serif;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Lato', sans-serif;
+}
