@@ -24,11 +24,13 @@ document.addEventListener("DOMContentLoaded", function () {
       password,
     };
     try {
-      await axios.post("http://localhost:3000/user/login", obj);
+      const response = await axios.post("http://localhost:3000/user/login", obj);
+      alert(response.data.message);
+      localStorage.setItem("token", response.data.token);
       emailInp.value = "";
       passwordInp.value = "";
     } catch (err) {
-      alert(err);
+      alert(err.response.data.error);
     }
   }
 
