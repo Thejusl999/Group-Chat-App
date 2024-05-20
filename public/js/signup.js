@@ -25,12 +25,12 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (err) {
       alert("User already exists, Please Login!");
     }finally{
-      // window.location.href = "../html/login.html";
+      window.location.href = "../html/login.html";
     }
   }
 
   function showLoginPage() {
-    // window.location.href = "../html/login.html";
+    window.location.href = "../html/login.html";
   }
 
   function clearForm() {
