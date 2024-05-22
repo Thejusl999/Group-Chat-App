@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("token", response.data.token);
       emailInp.value = "";
       passwordInp.value = "";
+      window.location.href = "../html/home.html";
     } catch (err) {
       alert(err.response.data.error);
     }
