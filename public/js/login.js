@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const response = await axios.post("http://localhost:3000/user/login", obj);
       alert(response.data.message);
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("id", response.data.id);
       emailInp.value = "";
       passwordInp.value = "";
       window.location.href = "../html/home.html";

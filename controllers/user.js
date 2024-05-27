@@ -51,7 +51,8 @@ exports.userLogin=async (req,res,next)=>{
                 return res.status(200).json({
                     success:true,
                     message:'Successfully logged in!',
-                    token:generateToken(userData.id,userData.name)
+                    token:generateToken(userData.id,userData.name),
+                    id:userData.id
                 });
             }else{
                 await transact.commit();

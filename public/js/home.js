@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
+  var initial=0;
   const groupLi=document.getElementById('groupLi');
   const chatIcon=document.getElementById('chatIcon');
-
+  
   const defaultDisplay=document.querySelector('.default-screen');
   const chatHeader = document.getElementById('chatHeader');
   const messagesList = document.getElementById('messages');
@@ -34,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     console.log(response.data.message);
     message.value = '';
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    messagesList.scrollTop = messagesDiv.scrollHeight;
   });
 
   function showMessages(groupOrPerson) {
@@ -58,4 +59,31 @@ document.addEventListener("DOMContentLoaded", function () {
     messagesDiv.style.display='none';
     messageInp.style.display='none';
   }
-})
+
+  document.addEventListener("DOMContentLoaded",screenReload(event));
+  async function screenReload(){
+    const response=await axios.get(
+      "http://localhost:3000/home/getMessages",
+      {
+        headers: { "Authorization": localStorage.getItem('token') },
+      }
+    );
+    messagesList.innerHTML='';
+    const myUserId=Number(localStorage.getItem('id'));
+    response.data.messages.forEach(message => {      
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'message';
+      let author=message.userId===myUserId?'You':`user${message.userId}`;
+      messageDiv.innerHTML = `<div class=${author}><span class="author">${author}:</span> <span class="text">${message.messageContent}</span></div>`;
+      messagesList.appendChild(messageDiv);
+    });
+    if(initial===0&&messagesDiv.style.display!=='none'){
+      messagesList.scrollTop = messagesDiv.scrollHeight;
+      initial++;
+    }
+  }
+  
+  if(localStorage.getItem('token')!==null){
+    setInterval(()=>screenReload(),1000);
+  }
+});
