@@ -17,7 +17,16 @@ app.use(bodyParser.json({extended:false}));
 app.use(express.static(path.join(__dirname,'.',"public")));
 
 const userRoutes=require('./routes/users');
+const messageRoutes=require('./routes/messages');
+
+const User = require('./models/User');
+const Message=require('./models/Message');
+
 app.use('/user',userRoutes);
+app.use('/home',messageRoutes);
+
+User.hasMany(Message);
+Message.belongsTo(User);
 
 sequelize
     .sync()

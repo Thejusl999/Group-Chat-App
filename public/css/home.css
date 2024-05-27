@@ -1,7 +1,8 @@
 body {
   font-family: "Arial", sans-serif;
   display: flex;
-  height:100vh;
+  height: 100vh;
+  margin: 0;
   border: 20px solid #001220eb;
 }
 .icon-sidebar{
@@ -14,8 +15,10 @@ body {
   flex-direction: column;
   border:  1px solid cyan;
 }
+.messages::-webkit-scrollbar {
+  display: none;
+}
 .icon-sidebar svg:hover{
-  background-color: #001220eb;
   padding-left: 3px;
   padding-right: 3px;
 }
@@ -50,9 +53,9 @@ body {
   background-color: #001220;
 }
 .chat-window {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
   border:  1px solid cyan;
 }
 .default-screen{
@@ -60,7 +63,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  flex: 1;
+  overflow-y: hidden;
   background-color: #001220;
 }
 .chat-window img{
@@ -75,13 +79,12 @@ body {
   font-size: 1.5em;
 }
 .messages {
+  flex: 1;
   padding: 20px;
   padding-bottom: 5px;
   overflow-y: auto;
-  scrollbar-color: black;
   display: flex;
   flex-direction: column;
-  height: 76vh;
   background-color: #001220;
 }
 .message {
@@ -94,10 +97,15 @@ body {
 .You{
   float: right;
 }
+#messagesDiv{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: hidden;
+}
 .message .text {
-  margin-left: 10px;
   display: inline-block;
-  padding: 10px;
+  padding: 8px;
   border-radius: 5px;
   background-color: cyan;
   color:#001220;
