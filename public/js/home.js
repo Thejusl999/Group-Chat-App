@@ -62,15 +62,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("DOMContentLoaded",screenReload(event));
   async function screenReload(){
-    const response=await axios.get(
-      "http://localhost:3000/home/getMessages",
-      {
-        headers: { "Authorization": localStorage.getItem('token') },
-      }
-    );
+    let finalMsgs=[];
+    let lastInd=0;
+    let response=undefined;
+    if(localStorage.getItem('messages')!==null){
+      finalMsgs=JSON.parse(localStorage.getItem('messages')).slice(0,10);
+      lastInd=finalMsgs[finalMsgs.length-1].id;
+      response=await axios.get(
+        `http://localhost:3000/home/getMessages?lastInd=${lastInd}`,
+        {
+          headers: { "Authorization": localStorage.getItem('token') },
+        }
+      );
+      finalMsgs=[...finalMsgs,...response.data.messages];
+    }else{
+      response=await axios.get(
+        `http://localhost:3000/home/getMessages`,
+        {
+          headers: { "Authorization": localStorage.getItem('token') },
+        }
+      );
+      finalMsgs=[...finalMsgs,...response.data.messages]
+    }
+    if(response.data.messages.length>0){
+      finalMsgs=finalMsgs.reverse().slice(0,10).reverse();
+      localStorage.setItem('messages',JSON.stringify(finalMsgs));
+    }else{
+      localStorage.setItem('messages',JSON.stringify(finalMsgs));
+    }
     messagesList.innerHTML='';
     const myUserId=Number(localStorage.getItem('id'));
-    response.data.messages.forEach(message => {      
+    let myMessages=JSON.parse(localStorage.getItem('messages'));
+    myMessages.forEach(message => {
       const messageDiv = document.createElement('div');
       messageDiv.className = 'message';
       let author=message.userId===myUserId?'You':`user${message.userId}`;

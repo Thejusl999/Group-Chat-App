@@ -1,5 +1,6 @@
 const sequelize=require('../util/database');
 const Message=require('../models/Message');
+const {Op}=require('sequelize');
 
 exports.sendMessage=async(req,res,next)=>{
     const transact=await sequelize.transaction();
@@ -17,11 +18,15 @@ exports.sendMessage=async(req,res,next)=>{
 
 exports.getMessages=async(req,res,next)=>{
     const transact=await sequelize.transaction();
+    let last=Number(req.query.lastInd)||-1;
     try{
-        const messages=await Message.findAll({transaction:transact});
+        const messages=await Message.findAll({where:{id:{[Op.gt]:last}}},{transaction:transact})||[];
         if(messages.length>0){
             await transact.commit();
             return res.status(200).json({success:true,messages:messages});
+        }else{
+            await transact.commit();
+            return res.status(200).json({success:true,messages:[]});
         }
     }catch(err){
         await transact.rollback();
